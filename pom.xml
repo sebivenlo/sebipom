@@ -16,7 +16,7 @@
     </developers>
     <groupId>nl.fontys.sebivenlo</groupId>
     <artifactId>sebipom</artifactId>
-    <version>1.4.2</version>
+    <version>1.4.3</version>
     <packaging>pom</packaging>
 
     <name>SEBIVenlo :: SEBIPom</name>
@@ -406,7 +406,7 @@
                                     <executable>${java.home}/bin/java</executable>
                                     <arguments>
                                         <argument>-jar</argument>
-                                        <argument>${project.build.directory}/${project.build.finalName}.jar</argument>
+                                        <argument>${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar</argument>
                                     </arguments>
                                 </configuration>
                             </execution>

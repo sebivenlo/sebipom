@@ -16,7 +16,7 @@
     </developers>
     <groupId>nl.fontys.sebivenlo</groupId>
     <artifactId>sebipom</artifactId>
-    <version>1.4.4</version>
+    <version>1.4.5</version>
     <packaging>pom</packaging>
 
     <name>SEBIVenlo :: SEBIPom</name>
@@ -104,7 +104,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-		  <!--<release>11</release>-->
+                    <!--<release>11</release>-->
                     <source>1.8</source> 
                     <target>1.8</target> 
                 </configuration>
@@ -136,7 +136,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -145,6 +144,35 @@
                         </goals>
                     </execution>
                 </executions>
+                <version>3.0.1</version>
+                <configuration>
+                    <additionalParam>-Xdoclint:none</additionalParam>
+                    <additionalParam>-html5</additionalParam>
+                    <additionalOptions>--allow-script-in-comments</additionalOptions>
+                    <resourcesArtifacts>
+                        <resourceArtifact>
+                            <groupId>nl.fontys.sebivenlo</groupId>
+                            <artifactId>javadochighlighter</artifactId>
+                            <version>1.0</version>
+                        </resourceArtifact>
+                    </resourcesArtifacts>
+                    <!-- Add SyntaxHighlighter feature.
+                    This gets added to the top of every Javadoc html file -->
+                    <top><![CDATA[
+                            <script src="{@docRoot}/syntaxhighlighter/syntaxhighlighter.js" type="text/javascript"></script>
+                            <link href="{@docRoot}/syntaxhighlighter/theme.css" rel="stylesheet" type="text/css" title="Style">
+                            ]]>
+                    </top>                            
+                    <!-- Activate and customize SyntaxHighlighter feature 
+                    This gets added to the bottom of every Javadoc html file -->
+                    <footer><![CDATA[
+                            <script type="text/javascript">
+                               SyntaxHighlighter.defaults["auto-links"] = false;
+                               SyntaxHighlighter.defaults["tab-size"] = 2;
+                               SyntaxHighlighter.all();
+                            </script>
+                        ]]></footer>                            
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

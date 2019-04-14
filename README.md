@@ -1,5 +1,5 @@
 # sebipom
-maven parent project file for use with sebi venlo projects. Split off from statewalker.
+Maven parent project file for use with sebi venlo projects. Split off from statewalker.
 
 
 Mavenitis is not avoidable, but configuritis is.

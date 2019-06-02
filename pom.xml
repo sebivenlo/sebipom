@@ -135,47 +135,6 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <version>3.0.1</version>
-                <configuration>
-                    <additionalParam>-Xdoclint:none</additionalParam>
-                    <additionalParam>-html5</additionalParam>
-                    <additionalOptions>--allow-script-in-comments</additionalOptions>
-                    <resourcesArtifacts>
-                        <resourceArtifact>
-                            <groupId>nl.fontys.sebivenlo</groupId>
-                            <artifactId>javadochighlighter</artifactId>
-                            <version>1.0</version>
-                        </resourceArtifact>
-                    </resourcesArtifacts>
-                    <!-- Add SyntaxHighlighter feature.
-                    This gets added to the top of every Javadoc html file -->
-                    <top><![CDATA[
-                            <script src="{@docRoot}/syntaxhighlighter/syntaxhighlighter.js" type="text/javascript"></script>
-                            <link href="{@docRoot}/syntaxhighlighter/theme.css" rel="stylesheet" type="text/css" title="Style">
-                            ]]>
-                    </top>                            
-                    <!-- Activate and customize SyntaxHighlighter feature 
-                    This gets added to the bottom of every Javadoc html file -->
-                    <footer><![CDATA[
-                            <script type="text/javascript">
-                               SyntaxHighlighter.defaults["auto-links"] = false;
-                               SyntaxHighlighter.defaults["tab-size"] = 2;
-                               SyntaxHighlighter.all();
-                            </script>
-                        ]]></footer>                            
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.1</version>
             </plugin>
@@ -426,28 +385,6 @@
                         <artifactId>exec-maven-plugin</artifactId>
                         <version>1.6.0</version>
                         <executions>
-                            <execution>
-                                <id>unpack-dependencies</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                                <configuration>
-                                    <executable>${java.home}/../bin/javapackager</executable>
-                                    <arguments>
-                                        <argument>-createjar</argument>
-                                        <argument>-nocss2bin</argument>
-                                        <argument>-appclass</argument>
-                                        <argument>${exec.mainClass}</argument>
-                                        <argument>-srcdir</argument>
-                                        <argument>${project.build.directory}/classes</argument>
-                                        <argument>-outdir</argument>
-                                        <argument>${project.build.directory}</argument>
-                                        <argument>-outfile</argument>
-                                        <argument>${project.build.finalName}.jar</argument>
-                                    </arguments>
-                                </configuration>
-                            </execution>
                             <execution>
                                 <id>default-cli</id>
                                 <goals>

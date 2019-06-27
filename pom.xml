@@ -461,6 +461,17 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>3.1.0</version>
                         <configuration>
+			  <show>private</show>
+			  <offlineLinks>
+			    <offlineLink>
+			      <url>file:///usr/share/doc/oracle-java-8-doc/docs/api/</url>
+			      <location>file:///usr/share/doc/oracle-java-8-doc/docs/api/</location>
+			    </offlineLink>
+			    <offlineLink>
+			      <url>file:///usr/share/doc/javafx-doc/api/</url>
+			      <location>/usr/share/doc/javafx-doc/api/</location>
+			    </offlineLink>
+			  </offlineLinks>
                             <sourcepath>${basedir}/src/main/java;${basedir}/src/test/java</sourcepath>
                             <additionalDependencies>
                                 <additionalDependency>
@@ -475,14 +486,6 @@
                                 </additionalDependency>
                             </additionalDependencies>
                         </configuration>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>

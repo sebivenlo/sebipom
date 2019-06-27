@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <description>Fontys Venlo Elevator project artifacts. "Up with your competencies"</description>
+    <description>Fontys Venlo project artifacts. "Up with your competencies".
+        Base pom to have maven features but avoid copy and waste or or cargo cult pom files.
+        Use as parent pom.
+    </description>
     <developers>
         <developer>
             <id>hom</id>
@@ -16,9 +19,8 @@
     </developers>
     <groupId>nl.fontys.sebivenlo</groupId>
     <artifactId>sebipom</artifactId>
-    <version>1.4.6</version>
+    <version>1.4.7</version>
     <packaging>pom</packaging>
-
     <name>SEBIVenlo :: SEBIPom</name>
     <url>https://www.fontysvenlo.org/repository</url>
 
@@ -194,7 +196,7 @@
                 <!-- for the time being this is copy and waste from the javadoc part in build-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.1.0</version>
                 <configuration>
                     <additionalParam>-Xdoclint:none</additionalParam>
                     <additionalParam>-html5</additionalParam>
@@ -320,7 +322,7 @@
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
                         <!-- keep at version 0.8.1 because of incompatible change in jacoco 0.8.2-->
-                        <version>0.8.1</version>
+                        <version>0.8.4</version>
                         <executions>
                             <execution>
                                 <id>default-prepare-agent</id>
@@ -451,12 +453,28 @@
             </build>
         </profile>
         <profile>
-            <id>attach-javadoc</id>
+            <id>all-javadoc</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <configuration>
+                            <sourcepath>${basedir}/src/main/java;${basedir}/src/test/java</sourcepath>
+                            <additionalDependencies>
+                                <additionalDependency>
+                                    <groupId>junit</groupId>
+                                    <artifactId>junit</artifactId>
+                                    <version>4.12</version>
+                                </additionalDependency>
+                                <additionalDependency>
+                                    <groupId>org.mockito</groupId>
+                                    <artifactId>mockito-core</artifactId>
+                                    <version>2.24.0</version>
+                                </additionalDependency>
+                            </additionalDependencies>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>

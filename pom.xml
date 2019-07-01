@@ -485,7 +485,12 @@
                                     <artifactId>mockito-core</artifactId>
                                     <version>2.24.0</version>
                                 </additionalDependency>
-                            </additionalDependencies>
+                                <additionalDependency>
+                                   <groupId>pl.pragmatists</groupId>
+				   <artifactId>JUnitParams</artifactId>
+				   <version>1.1.1</version>
+                                </additionalDependency>
+			    </additionalDependencies>
                         </configuration>
                     </plugin>
                 </plugins>

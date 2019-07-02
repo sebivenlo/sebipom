@@ -462,17 +462,17 @@
                         <version>3.1.0</version>
                         <configuration>
                             <detectJavaApiLink>false</detectJavaApiLink>
-			  <show>private</show>
-			  <offlineLinks>
-			    <offlineLink>
-			      <url>file:///usr/share/doc/oracle-java-8-doc/docs/api/</url>
-			      <location>/usr/share/doc/oracle-java-8-doc/docs/api/</location>
-			    </offlineLink>
-			    <offlineLink>
-			      <url>file:///usr/share/doc/javafx-doc/api/</url>
-			      <location>/usr/share/doc/javafx-doc/api/</location>
-			    </offlineLink>
-			  </offlineLinks>
+                            <show>private</show>
+                            <offlineLinks>
+                                <offlineLink>
+                                    <url>file:///usr/share/doc/oracle-java-8-doc/docs/api/</url>
+                                    <location>/usr/share/doc/oracle-java-8-doc/docs/api/</location>
+                                </offlineLink>
+                                <offlineLink>
+                                    <url>file:///usr/share/doc/javafx-doc/api/</url>
+                                    <location>/usr/share/doc/javafx-doc/api/</location>
+                                </offlineLink>
+                            </offlineLinks>
                             <sourcepath>${basedir}/src/main/java;${basedir}/src/test/java</sourcepath>
                             <additionalDependencies>
                                 <additionalDependency>
@@ -491,11 +491,21 @@
                                     <version>2.24.0</version>
                                 </additionalDependency>
                                 <additionalDependency>
-                                   <groupId>pl.pragmatists</groupId>
-				   <artifactId>JUnitParams</artifactId>
-				   <version>1.1.1</version>
+                                    <groupId>pl.pragmatists</groupId>
+                                    <artifactId>JUnitParams</artifactId>
+                                    <version>1.1.1</version>
                                 </additionalDependency>
-			    </additionalDependencies>
+                                <additionalDependency>
+                                    <groupId>io.rest-assured</groupId>
+                                    <artifactId>rest-assured</artifactId>
+                                    <version>3.0.7</version>
+                                </additionalDependency>
+                                <additionalDependency>
+                                    <groupId>org.postgresql</groupId>
+                                    <artifactId>postgresql</artifactId>
+                                    <version>42.2.5</version>
+                                </additionalDependency>
+                            </additionalDependencies>
                         </configuration>
                     </plugin>
                 </plugins>

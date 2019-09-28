@@ -31,14 +31,14 @@
         </repository>
         <site>
             <id>javabits.fontysvenlo.org</id>
-            <url>scpexe://fontysvenlo.org/home/javabits/public_html/statewalker</url>
+            <url>scpexe://${publish-url}</url>
         </site>
     </distributionManagement>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.lib.dir>/usr/share/java</java.lib.dir>
         <checkstyle.config.location>${user.home}/Library/sebivenlo_checks.xml</checkstyle.config.location>
-
+        <publish-url>fontysvenlo.org/home/javabits/public_html/sebipom</publish-url>
     </properties>
 
     <pluginRepositories>

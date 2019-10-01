@@ -188,7 +188,6 @@
                 <version>3.2.0</version>
             </extension>
         </extensions>
-
     </build>
     <reporting>
         <plugins>
@@ -225,7 +224,6 @@
                             </script>
                         ]]></footer>                            
                 </configuration>
-                        
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -316,12 +314,10 @@
         <profile>
             <id>jacoco</id>
             <build>
-                
                 <plugins>
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
-                        <!-- keep at version 0.8.1 because of incompatible change in jacoco 0.8.2-->
                         <version>0.8.4</version>
                         <executions>
                             <execution>
@@ -350,9 +346,6 @@
                             </execution>
                             <execution>
                                 <id>default-check</id>
-                                <!--                        <goals>
-                                    <goal>check</goal>
-                                </goals>-->
                                 <configuration>
                                     <rules>
                                         <!--  implementation is needed only for Maven 2  -->
@@ -509,6 +502,15 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>3.1.1</version>
+                        <executions> 
+                            <execution> 
+                                <id>attach-javadocs</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals> 
+                            </execution> 
+                        </executions> 
                         <configuration>
                             <detectJavaApiLink>false</detectJavaApiLink>
                             <show>private</show>
@@ -557,9 +559,22 @@
                             </additionalDependencies>
                         </configuration>
                     </plugin>
+                    <plugin> 
+                        <!-- explicitly define maven-deploy-plugin after other to force exec order -->
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>2.8.2</version>
+                        <executions> 
+                            <execution> 
+                                <id>deploy</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals> 
+                            </execution> 
+                        </executions> 
+                    </plugin>
                 </plugins>
             </build>
         </profile>
     </profiles>
-
 </project>

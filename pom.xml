@@ -544,7 +544,8 @@
                 </resources>
             </build>
         </profile>
-                    <id>all-javadoc-linklocal</id>
+        <profile>
+            <id>all-javadoc-linklocal</id>
             <build>
                 <plugins>
                     <plugin>

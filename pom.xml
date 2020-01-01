@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <description>Fontys Venlo Elevator project artifacts. "Up with your competencies"</description>
+    <description>Fontys Venlo best practices. "Up with your competencies"
+        
+        Parent pom that provides all dependencies that you need for modern testing, generating 
+        good looking javadoc and a set of static test reports using findbugs, pmd, and chanckstyle.
+        This is NOT cargo-cult, because none of the dependencies in this pom will end up in your final product.
+    </description>
+
     <developers>
         <developer>
             <id>hom</id>
             <email>p.vandenhombergh@fontys.nl</email>
             <name>Pieter van den Hombergh</name>
-            <organization>Fontys Hogeschool voor Techniek en Logistiek, Opleidingen Software Engineering en Business Informatica</organization>
+            <organization>Fontys Hogeschool voor Techniek en Logistiek, 
+                Opleidingen Software Engineering en Business Informatica</organization>
             <timezone>2.0.0+</timezone>
             <roles>
                 <role>main developer</role>
@@ -16,9 +23,8 @@
     </developers>
     <groupId>nl.fontys.sebivenlo</groupId>
     <artifactId>sebipom</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
     <packaging>pom</packaging>
-
     <name>SEBIVenlo :: SEBIPom</name>
     <url>https://www.fontysvenlo.org/repository</url>
 
@@ -35,8 +41,32 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.lib.dir>/usr/share/java</java.lib.dir>
+        <java.release>11</java.release>
         <checkstyle.config.location>${user.home}/Library/sebivenlo_checks.xml</checkstyle.config.location>
-
+        
+        <org.apache.maven.plugins.maven-assembly-plugin.version>3.2.0</org.apache.maven.plugins.maven-assembly-plugin.version>
+        <org.apache.maven.plugins.maven-checkstyle-plugin.version>3.1.0</org.apache.maven.plugins.maven-checkstyle-plugin.version>
+        <org.apache.maven.plugins.maven-compiler-plugin.version>3.8.1</org.apache.maven.plugins.maven-compiler-plugin.version>
+        <org.apache.maven.plugins.maven-failsafe-plugin.version>2.22.2</org.apache.maven.plugins.maven-failsafe-plugin.version>
+        <org.apache.maven.plugins.maven-jar-plugin.version>3.2.0</org.apache.maven.plugins.maven-jar-plugin.version>
+        <org.apache.maven.plugins.maven-javadoc-plugin.version>3.1.1</org.apache.maven.plugins.maven-javadoc-plugin.version>
+        <org.apache.maven.plugins.maven-jxr-plugin.version>3.0.0</org.apache.maven.plugins.maven-jxr-plugin.version>
+        <org.apache.maven.plugins.maven-pmd-plugin.version>3.12.0</org.apache.maven.plugins.maven-pmd-plugin.version>
+        <org.apache.maven.plugins.maven-project-info-reports-plugin.version>3.0.0</org.apache.maven.plugins.maven-project-info-reports-plugin.version>
+        <org.apache.maven.plugins.maven-release-plugin.version>2.5.3</org.apache.maven.plugins.maven-release-plugin.version>
+        <org.apache.maven.plugins.maven-resources-plugin.version>3.1.0</org.apache.maven.plugins.maven-resources-plugin.version>
+        <org.apache.maven.plugins.maven-site-plugin.version>3.8.2</org.apache.maven.plugins.maven-site-plugin.version>
+        <org.apache.maven.plugins.maven-source-plugin.version>3.2.0</org.apache.maven.plugins.maven-source-plugin.version>
+        <org.apache.maven.plugins.maven-surefire-plugin.version>2.22.2</org.apache.maven.plugins.maven-surefire-plugin.version>
+        <org.codehaus.mojo.exec-maven-plugin.version>1.6.0</org.codehaus.mojo.exec-maven-plugin.version>
+        <org.codehaus.mojo.findbugs-maven-plugin.version>3.0.5</org.codehaus.mojo.findbugs-maven-plugin.version>
+        <org.jacoco.jacoco-maven-plugin.version>0.8.5</org.jacoco.jacoco-maven-plugin.version>
+        <org.pitest.pitest-maven.version>1.4.10</org.pitest.pitest-maven.version>
+        <junit.junit.version>4.12</junit.junit.version>
+        <org.junit.jupiter.version>5.5.2</org.junit.jupiter.version>
+        <org.assertj.assertj-core.version>3.14.0</org.assertj.assertj-core.version>
+        <org.mockito.mockito-core.version>3.1.0</org.mockito.mockito-core.version>
+        
     </properties>
 
     <pluginRepositories>
@@ -64,7 +94,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>${org.apache.maven.plugins.maven-source-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -85,12 +115,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${org.apache.maven.plugins.maven-project-info-reports-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>${org.apache.maven.plugins.maven-jar-plugin.version}</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -102,9 +132,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${org.apache.maven.plugins.maven-compiler-plugin.version}</version>
                 <configuration>
+<<<<<<< HEAD
                     <release>11</release>
+=======
+                    <release>${java.release}</release>
+>>>>>>> 5acaa24b54b420f20d67c339d73fff755777733d
                     <!-- <source>1.8</source> -->
                     <!-- <target>1.8</target> -->
                 </configuration>
@@ -112,7 +146,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${org.apache.maven.plugins.maven-assembly-plugin.version}</version>
                 <configuration>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -136,7 +170,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${org.apache.maven.plugins.maven-javadoc-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -149,12 +183,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>${org.apache.maven.plugins.maven-surefire-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>${org.apache.maven.plugins.maven-failsafe-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>default-integration-test</id>
@@ -167,7 +201,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.8.2</version>
+                <version>${org.apache.maven.plugins.maven-site-plugin.version}</version>
                 <configuration>
                     <outputEncoding>UTF-8</outputEncoding>
                 </configuration>
@@ -175,12 +209,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
+                <version>${org.apache.maven.plugins.maven-release-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.4.10</version>
+                <version>${org.pitest.pitest-maven.version}</version>
                 <configuration>
                     <targetClasses>
                         <param>${pitTargetClasses}</param>
@@ -196,17 +230,17 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ssh-external</artifactId>
-                <version>3.2.0</version>
+                <version>3.3.3</version>
             </extension>
         </extensions>
-
+        
     </build>
     <reporting>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${org.apache.maven.plugins.maven-javadoc-plugin.version}</version>
                 <configuration>
                     <additionalParam>-Xdoclint:none</additionalParam>
                     <additionalParam>-html5</additionalParam>
@@ -240,12 +274,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${org.apache.maven.plugins.maven-jxr-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.12.0</version>
+                <version>${org.apache.maven.plugins.maven-pmd-plugin.version}</version>
                 <configuration>
                     <linkXref>true</linkXref>
                     <sourceEncoding>utf-8</sourceEncoding>
@@ -262,7 +296,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>${org.apache.maven.plugins.maven-checkstyle-plugin.version}</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
@@ -273,7 +307,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.12.0</version>
+                <version>${org.apache.maven.plugins.maven-pmd-plugin.version}</version>
                 <configuration>
                     <linkXref>true</linkXref>
                     <sourceEncoding>utf-8</sourceEncoding>
@@ -284,13 +318,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${org.apache.maven.plugins.maven-jxr-plugin.version}</version>
                 <configuration></configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.5</version>
+                <version>${org.codehaus.mojo.findbugs-maven-plugin.version}</version>
                 <configuration>
                     <xmlOutput>true</xmlOutput>
                 </configuration>
@@ -301,13 +335,43 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${org.assertj.assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.28.2</version>
+            <version>${org.mockito.mockito-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${org.junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${org.junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${org.junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${org.junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -332,7 +396,7 @@
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
                         <!-- keep at version 0.8.1 because of incompatible change in jacoco 0.8.2-->
-                        <version>0.8.5</version>
+                        <version>${org.jacoco.jacoco-maven-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>default-prepare-agent</id>
@@ -395,7 +459,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
-                        <version>1.6.0</version>
+                        <version>${org.codehaus.mojo.exec-maven-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>unpack-dependencies</id>
@@ -437,7 +501,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
-                        <version>3.8.1</version>
+                        <version>${org.apache.maven.plugins.maven-compiler-plugin.version}</version>
                         <configuration>
                             <source>${maven.compiler.source}</source>
                             <target>${maven.compiler.target}</target>
@@ -449,7 +513,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
+                        <version>${org.apache.maven.plugins.maven-surefire-plugin.version}</version>
                         <configuration>
                             <additionalClasspathElements>
                                 <additionalClasspathElement>${java.home}/lib/jfxrt.jar</additionalClasspathElement>

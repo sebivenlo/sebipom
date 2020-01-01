@@ -104,7 +104,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-		  <release>11</release>
+                    <release>11</release>
                     <!-- <source>1.8</source> -->
                     <!-- <target>1.8</target> -->
                 </configuration>
@@ -484,7 +484,8 @@
                 </resources>
             </build>
         </profile>
-                    <id>all-javadoc-linklocal</id>
+        <profile>
+            <id>all-javadoc-linklocal</id>
             <build>
                 <plugins>
                     <plugin>

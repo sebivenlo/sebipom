@@ -43,8 +43,6 @@
         <java.lib.dir>/usr/share/java</java.lib.dir>
         <java.release>11</java.release>
         <maven.compiler.release>${java.release}</maven.compiler.release>
-        <maven.compiler.source>${java.release}</maven.compiler.source>
-        <maven.compiler.target>${java.release}</maven.compiler.target>
         <checkstyle.config.location>${user.home}/Library/sebivenlo_checks.xml</checkstyle.config.location>
         
         <org.apache.maven.plugins.maven-assembly-plugin.version>3.2.0</org.apache.maven.plugins.maven-assembly-plugin.version>
@@ -199,9 +197,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <release>11</release>
-                    <source>11</source> 
-                    <target>11</target> 
+                    <release>${java.release}</release>
+                    <source>${java.release}</source> 
+                    <target>${java.release}</target> 
                 </configuration>
             </plugin>
             <plugin>
@@ -231,7 +229,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <source>11</source>
+                    <source>${java.release}</source>
                 </configuration>
                 <executions>
                     
@@ -302,7 +300,8 @@
                     <additionalParam>-Xdoclint:none</additionalParam>
                     <additionalParam>-html5</additionalParam>
                     <additionalOptions>--allow-script-in-comments</additionalOptions>
-                    <source>11</source>
+                    <source>${java.release}</source>
+
 
                     <resourcesArtifacts>
                         <resourceArtifact>
@@ -590,11 +589,12 @@
                         <artifactId>maven-compiler-plugin</artifactId>
                         <version>${org.apache.maven.plugins.maven-compiler-plugin.version}</version>
                         <configuration>
-                            <source>${maven.compiler.source}</source>
-                            <target>${maven.compiler.target}</target>
+                            <source>${java.release}</source>
+                            <target>${java.release}</target>
                             <compilerArguments>
                                 <bootclasspath>${sun.boot.class.path}${path.separator}${java.home}/lib/jfxrt.jar</bootclasspath>
                             </compilerArguments>
+                            <compilerArgs><arg>--enable-preview</arg></compilerArgs>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -647,7 +647,7 @@
                             <detectJavaApiLink>false</detectJavaApiLink>
                             <!--<show>private</show>-->
                             <offlineLinks>
-<!--                                <offlineLink>
+                                <!--                                <offlineLink>
                                     <url>file:///usr/share/doc/oracle-java-8-doc/docs/api/</url>
                                     <location>/usr/share/doc/oracle-java-8-doc/docs/api/</location>
                                 </offlineLink>

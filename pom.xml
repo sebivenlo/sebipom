@@ -230,6 +230,8 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
                     <source>${java.release}</source>
+                    <release>${java.release}</release>
+                    <additionalOptions>--enable-preview</additionalOptions>
                 </configuration>
                 <executions>
                     
@@ -296,14 +298,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${org.apache.maven.plugins:maven-javadoc-plugin:version}</version>
                 <configuration>
                     <additionalParam>-Xdoclint:none</additionalParam>
                     <additionalParam>-html5</additionalParam>
-                    <additionalOptions>--allow-script-in-comments</additionalOptions>
+                    <additionalOptions>--allow-script-in-comments --enable-preview</additionalOptions>
+                    <release>${java.release}</release>
                     <source>${java.release}</source>
-
-
                     <resourcesArtifacts>
                         <resourceArtifact>
                             <groupId>nl.fontys.sebivenlo</groupId>

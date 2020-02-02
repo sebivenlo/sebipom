@@ -23,7 +23,7 @@
     </developers>
     <groupId>nl.fontys.sebivenlo</groupId>
     <artifactId>sebipom</artifactId>
-    <version>2.1.2</version>
+    <version>2.3.0</version>
     <packaging>pom</packaging>
     <name>SEBIVenlo :: SEBIPom</name>
     <url>https://www.fontysvenlo.org/repository</url>
@@ -64,9 +64,9 @@
         <org.jacoco:jacoco-maven-plugin:version>0.8.5</org.jacoco:jacoco-maven-plugin:version>
         <org.pitest:pitest-maven:version>1.4.10</org.pitest:pitest-maven:version>
         <junit.junit:version>4.12</junit.junit:version>
-        <org.junit.jupiter:version>5.5.2</org.junit.jupiter:version>
-        <org.assertj:assertj-core:version>3.14.0</org.assertj:assertj-core:version>
-        <org.mockito:mockito-core:version>3.1.0</org.mockito:mockito-core:version>
+        <org.junit.jupiter:version>5.6.0</org.junit.jupiter:version>
+        <org.assertj:assertj-core:version>3.15.0</org.assertj:assertj-core:version>
+        <org.mockito:mockito-core:version>3.2.4</org.mockito:mockito-core:version>
         
     </properties>
 

@@ -44,7 +44,7 @@
         <property name="basedir" value="${basedir}"/>
     -->
 
-<!--    <module name="SuppressionFilter">
+    <!--    <module name="SuppressionFilter">
         <property name="file" value="/home/java2/public_html/sebivenlo_suppressions.xml"/>
         <property name="optional" value="false"/>
     </module>-->
@@ -86,7 +86,7 @@
             <property name="scope" value="protected"/>
             <property name="allowUndeclaredRTE" value="true"/>
             <property name="allowMissingPropertyJavadoc" value="true"/>
-            <property name="minLineCount" value="-1"/>
+            <property name="minLineCount" value="1"/>
         </module>
         <module name="JavadocType">
             <property name="scope" value="protected"/>
@@ -135,8 +135,8 @@
         <!-- Checks for imports                              -->
         <!-- See http://checkstyle.sf.net/config_import.html -->
         <module name="AvoidStarImport">
-	  <property name="allowStaticMemberImports" value="true"/>
-	</module>
+            <property name="allowStaticMemberImports" value="true"/>
+        </module>
         <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
@@ -153,7 +153,10 @@
                       value="^package.*|^import.*|editor-fold|Start Solution|End Solution|href|http|^\s*\*"/>
         </module>
         <module name="MethodLength"/>
-        <module name="ParameterNumber"/>
+        <module name="ParameterNumber">
+            <property name="max" value="10"/>
+            <property name="tokens" value="METHOD_DEF"/>
+        </module>
 
 
         <!-- Checks for whitespace                               -->

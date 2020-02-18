@@ -1,0 +1,2 @@
+#!/bin/bash
+mvn install -Dpit.report.skip=true site  deploy

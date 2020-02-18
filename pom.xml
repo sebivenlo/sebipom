@@ -43,7 +43,7 @@
         <java.lib.dir>/usr/share/java</java.lib.dir>
         <java.release>11</java.release>
         <maven.compiler.release>${java.release}</maven.compiler.release>
-        <checkstyle.config.location>${user.home}/Library/sebivenlo_checks.xml</checkstyle.config.location>
+        <checkstyle.config.location>${user.home}/.m2/sebivenlo_checks.xml</checkstyle.config.location>
         <javadoc.location>/usr/share/doc/openjdk-11-doc/docs/api/</javadoc.location>
         <org.apache.maven.plugins:maven-assembly-plugin:version>3.2.0</org.apache.maven.plugins:maven-assembly-plugin:version>
         <org.apache.maven.plugins:maven-checkstyle-plugin:version>3.1.0</org.apache.maven.plugins:maven-checkstyle-plugin:version>
@@ -255,6 +255,8 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
                     <source>${java.release}</source>
+                    <release>${java.release}</release>
+                    <additionalOptions>--enable-preview</additionalOptions>
                 </configuration>
                 <executions>
                     
@@ -321,14 +323,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${org.apache.maven.plugins:maven-javadoc-plugin:version}</version>
                 <configuration>
                     <additionalParam>-Xdoclint:none</additionalParam>
                     <additionalParam>-html5</additionalParam>
-                    <additionalOptions>--allow-script-in-comments</additionalOptions>
+                    <additionalOptions>--allow-script-in-comments --enable-preview</additionalOptions>
+                    <release>${java.release}</release>
                     <source>${java.release}</source>
-
-
                     <resourcesArtifacts>
                         <resourceArtifact>
                             <groupId>nl.fontys.sebivenlo</groupId>

@@ -4,6 +4,26 @@
           "https://checkstyle.org/dtds/configuration_1_3.dtd">
 
 <!--
+    Checkstyle configuration for SEBI Venlo. Version 2020-02-17.
+    
+    We try to stick close to the google coding conventions with a few tweaks.
+    - Use whitespace to promote readability, both horizontally and vertically.
+    - Force the use of javadoc in production code.
+    
+    Checkstyle configuration that checks the google coding conventions as described in:
+
+    - the Java Language Specification at
+      http://java.sun.com/docs/books/jls/second_edition/html/index.html
+
+    - the Sun Code Conventions at http://java.sun.com/docs/codeconv/
+
+    - the Javadoc guidelines at
+      http://java.sun.com/j2se/javadoc/writingdoccomments/index.html
+
+    - the JDK Api documentation http://java.sun.com/j2se/docs/api/index.html
+
+    - some best practices
+
     Checkstyle configuration that checks the Google coding conventions from Google Java Style
     that can be found at https://google.github.io/styleguide/javaguide.html
 
@@ -14,6 +34,7 @@
     To suppress certain violations please review suppression filters.
 
     Authors: Max Vetrenko, Ruslan Diachenko, Roman Ivanov.
+    Modifications: Pieter van den Hombergh. (abbrev: HOM)
  -->
 
 <module name = "Checker">
@@ -40,6 +61,7 @@
         <property name="eachLine" value="true"/>
     </module>
 
+    <!-- allow line with // comments to extend past limit (HOM) -->
     <module name="LineLength">
         <property name="fileExtensions" value="java"/>
         <property name="max" value="100"/>
@@ -215,6 +237,7 @@
             <message key="ws.notPreceded"
              value="GenericWhitespace ''{0}'' is not preceded with whitespace."/>
         </module>
+	<!-- All indents to 4 HOM -->
         <module name="Indentation">
             <property name="basicOffset" value="4"/>
             <property name="braceAdjustment" value="0"/>
@@ -232,6 +255,7 @@
         </module>
         <!-- <module name="OverloadMethodsDeclarationOrder"/> -->
         <module name="VariableDeclarationUsageDistance"/>
+	<!-- be less strict on import order. HOM. -->
         <!-- <module name="CustomImportOrder"> -->
         <!--     <property name="sortImportsInGroupAlphabetically" value="true"/> -->
         <!--     <property name="separateLineBetweenGroups" value="true"/> -->

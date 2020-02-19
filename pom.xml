@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <description>Fontys Venlo best practices. "Up with your competencies"
+    <description>Fontys Venlo best maven practices. "Up with your competencies"
         
-        Parent pom that provides all dependencies that you need for modern testing, generating 
-        good looking javadoc and a set of static test reports using findbugs, pmd, and chanckstyle.
-        This is NOT cargo-cult, because none of the dependencies in this pom will end up in your final product.
+    The 'Sebipom' Parent pom that provides all dependencies that you need for modern testing, generating 
+        good looking Javadoc and a set of static test reports using spotbugs, pmd, and checkstyle.
+        This is NOT cargo-cult, because NONE of the dependencies in this pom will end up in your final product.
     </description>
 
     <developers>

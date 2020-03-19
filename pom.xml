@@ -45,6 +45,9 @@
         <java.lib.dir>/usr/share/java</java.lib.dir>
         <java.release>11</java.release>
         <mockito.core.version>3.2.4</mockito.core.version>
+        <!-- surefire 3.0.0-Mx uses incompatible message handling for 
+        //  asserttions.fail, uses CDATA instead of plain xml text, so for the time being stay at 2.22.2 -->
+        <maven.surefire.version>2.22.2</maven.surefire.version>
         <maven.compiler.release>${java.release}</maven.compiler.release>
         <checkstyle.config.location>${user.home}/.m2/sebivenlo_checks.xml</checkstyle.config.location>
         <javadoc.location>/usr/share/doc/openjdk-11-doc/docs/api/</javadoc.location>
@@ -112,12 +115,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.22.2</version>
+                    <version>${maven.surefire.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>2.22.2</version>
+                    <version>${maven.surefire.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -933,6 +936,31 @@
                 </plugins>
             </reporting>
         </profile>
-
+        <profile>
+            <id>preview</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <release>${java.release}</release>
+                            <source>${java.release}</source>
+                            <target>${java.release}</target>
+                            <compilerArgs>
+                                <arg>--enable-preview</arg>
+                            </compilerArgs>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>--enable-preview</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 </project>

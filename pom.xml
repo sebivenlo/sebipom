@@ -6,6 +6,8 @@
         The 'Sebipom' Parent pom that provides all dependencies that you need for modern testing, generating 
         good looking Javadoc and a set of static test reports using spotbugs, pmd, and checkstyle.
         This is NOT cargo-cult, because NONE of the dependencies in this pom will end up in your final product.
+        
+        Version 2.3.6  added mockito jupiter plugin.
     </description>
 
     <developers>
@@ -23,7 +25,7 @@
     </developers>
     <groupId>nl.fontys.sebivenlo</groupId>
     <artifactId>sebipom</artifactId>
-    <version>2.3.5-SNAPSHOT</version>
+    <version>2.3.6</version>
     <packaging>pom</packaging>
     <name>SEBIVenlo :: SEBIPom</name>
     <url>https://www.fontysvenlo.org/repository</url>
@@ -42,6 +44,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.lib.dir>/usr/share/java</java.lib.dir>
         <java.release>11</java.release>
+        <mockito.core.version>3.2.4</mockito.core.version>
         <maven.compiler.release>${java.release}</maven.compiler.release>
         <checkstyle.config.location>${user.home}/.m2/sebivenlo_checks.xml</checkstyle.config.location>
         <javadoc.location>/usr/share/doc/openjdk-11-doc/docs/api/</javadoc.location>
@@ -176,22 +179,22 @@
                         <dependency>
                             <groupId>net.sourceforge.pmd</groupId>
                             <artifactId>pmd-core</artifactId>
-                            <version>${pmdVersion}</version>
+                            <version>6.21.0</version>
                         </dependency>
                         <dependency>
                             <groupId>net.sourceforge.pmd</groupId>
                             <artifactId>pmd-java</artifactId>
-                            <version>${pmdVersion}</version>
+                            <version>6.21.0</version>
                         </dependency>
                         <dependency>
                             <groupId>net.sourceforge.pmd</groupId>
                             <artifactId>pmd-javascript</artifactId>
-                            <version>${pmdVersion}</version>
+                            <version>6.21.0</version>
                         </dependency>
                         <dependency>
                             <groupId>net.sourceforge.pmd</groupId>
                             <artifactId>pmd-jsp</artifactId>
-                            <version>${pmdVersion}</version>
+                            <version>6.21.0</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -274,12 +277,37 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
                 <configuration>
-                    <source>${java.release}</source>
+                    <additionalParam>-Xdoclint:none</additionalParam>
+                    <additionalParam>-html5</additionalParam>
+                    <additionalOptions>--allow-script-in-comments --enable-preview</additionalOptions>
                     <release>${java.release}</release>
-                    <additionalOptions>--enable-preview</additionalOptions>
+                    <source>${java.release}</source>
                     <show>private</show>
-                    
+                    <resourcesArtifacts>
+                        <resourceArtifact>
+                            <groupId>nl.fontys.sebivenlo</groupId>
+                            <artifactId>javadochighlighter</artifactId>
+                            <version>1.0</version>
+                        </resourceArtifact>
+                    </resourcesArtifacts>
+                    <!-- Add SyntaxHighlighter feature.
+                    This gets added to the top of every Javadoc html file -->
+                    <top><![CDATA[
+                            <script src="{@docRoot}/syntaxhighlighter/syntaxhighlighter.js" type="text/javascript"></script>
+                            <link href="{@docRoot}/syntaxhighlighter/theme.css" rel="stylesheet" type="text/css" title="Style">
+                            ]]>
+                    </top>                            
+                    <!-- Activate and customize SyntaxHighlighter feature 
+                    This gets added to the bottom of every Javadoc html file -->
+                    <footer><![CDATA[
+                            <script type="text/javascript">
+                               SyntaxHighlighter.defaults["auto-links"] = false;
+                               SyntaxHighlighter.defaults["tab-size"] = 2;
+                               SyntaxHighlighter.all();
+                            </script>
+                        ]]></footer>                            
                 </configuration>
                 <executions>
                     
@@ -345,7 +373,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>3.2.4</version>
+                <version>${mockito.core.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
@@ -367,6 +395,11 @@
                 <artifactId>junit-vintage-engine</artifactId>
                 <version>5.6.0</version>
             </dependency>
+            <dependency>
+                <groupId>org.apiguardian</groupId>
+                <artifactId>apiguardian-api</artifactId>
+                <version>1.1.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -380,6 +413,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
                 <configuration>
                     <additionalParam>-Xdoclint:none</additionalParam>
                     <additionalParam>-html5</additionalParam>
@@ -503,6 +537,13 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.core.version}</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
@@ -602,9 +643,42 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>javafx-maven-plugin</artifactId>
+                        <version>0.0.4</version>
+                        <configuration>
+                            <mainClass>${exec.mainClass}</mainClass>
+                        </configuration>
+                    </plugin>
+                    
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <version>3.2.2</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>shade</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactSet>
+                                        <excludes>
+                                            <exclude>classworlds:classworlds</exclude>
+                                            <exclude>junit:junit</exclude>
+                                            <exclude>jmock:*</exclude>
+                                            <exclude>*:xml-apis</exclude>
+                                            <exclude>org.apache.maven:lib:tests</exclude>
+                                            <exclude>log4j:log4j:jar:</exclude>
+                                        </excludes>
+                                    </artifactSet>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!--                    <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
-                        <version>${org.codehaus.mojo.exec-maven-plugin:version}</version>
                         <executions>
                             <execution>
                                 <id>unpack-dependencies</id>
@@ -642,26 +716,10 @@
                                 </configuration>
                             </execution>
                         </executions>  
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <version>${org.apache.maven.plugins:maven-compiler-plugin:version}</version>
-                        <configuration>
-                            <source>${java.release}</source>
-                            <target>${java.release}</target>
-                            <compilerArguments>
-                                <bootclasspath>${sun.boot.class.path}${path.separator}${java.home}/lib/jfxrt.jar</bootclasspath>
-                            </compilerArguments>
-                            <compilerArgs>
-                                <arg>--enable-preview</arg>
-                            </compilerArgs>
-                        </configuration>
-                    </plugin>
+                    </plugin>-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>${org.apache.maven.plugins:maven-surefire-plugin:version}</version>
                         <configuration>
                             <additionalClasspathElements>
                                 <additionalClasspathElement>${java.home}/lib/jfxrt.jar</additionalClasspathElement>
@@ -780,38 +838,51 @@
                                 <additionalDependency>
                                     <groupId>junit</groupId>
                                     <artifactId>junit</artifactId>
+                                    <version>4.12</version>
                                     <scope>test</scope>
                                 </additionalDependency>
                                 <additionalDependency>
                                     <groupId>org.assertj</groupId>
                                     <artifactId>assertj-core</artifactId>
+                                    <version>3.15.0</version>
                                     <scope>test</scope>
                                 </additionalDependency>
                                 <additionalDependency>
                                     <groupId>org.mockito</groupId>
                                     <artifactId>mockito-core</artifactId>
+                                    <version>${mockito.core.version}</version>
                                     <scope>test</scope>
                                 </additionalDependency>
                                 <additionalDependency>
                                     <groupId>org.junit.jupiter</groupId>
                                     <artifactId>junit-jupiter-api</artifactId>
+                                    <version>5.6.0</version>
                                     <scope>test</scope>
                                 </additionalDependency>
                                 <additionalDependency>
                                     <groupId>org.junit.jupiter</groupId>
                                     <artifactId>junit-jupiter-params</artifactId>
+                                    <version>5.6.0</version>
                                     <scope>test</scope>
                                 </additionalDependency>
                                 <additionalDependency>
                                     <groupId>org.junit.jupiter</groupId>
                                     <artifactId>junit-jupiter-engine</artifactId>
+                                    <version>5.6.0</version>
                                     <scope>test</scope>
                                 </additionalDependency>
                                 <additionalDependency>
                                     <groupId>org.junit.vintage</groupId>
                                     <artifactId>junit-vintage-engine</artifactId>
+                                    <version>5.6.0</version>
                                     <scope>test</scope>
                                 </additionalDependency>
+                                <additionalDependency>
+                                    <groupId>org.apiguardian</groupId>
+                                    <artifactId>apiguardian-api</artifactId>
+                                    <version>1.1.0</version>
+                                </additionalDependency>
+
                             </additionalDependencies>
                         </configuration>
                     </plugin>

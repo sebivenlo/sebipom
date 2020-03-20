@@ -1,16 +1,14 @@
 # sebipom
 Maven parent project file for use with sebi venlo projects. Split off from statewalker.
 
-
-Mavenitis is not avoidable, but configuritis is.
+*Mavenitis* is not avoidable, but *Configuritis* is.
 If you did not know: If you use maven, maven will be quite diligent ant ensure that all your
 dependencies are up to date. This may and will lead to the behaviour of downloading the whole maven universe to
 your machine, or at least the pieces (dependencies) that are in use by your project, directly or indirectly or transitivitely.
 
 Once you get past the first symptoms of mavinitis, by simple accepting the dilligence that maven exhibts, because it takes
-it task as serious as it does, you can avoid configuritis by NOt configure every plugin in each and every project, but use something
-similiar to sebipom as parent pom in your project. Since a parent pom can have a parent, this does not limit you when yourwant or need to define a multi-module
-project with a parent pom defining the modules.
+it task as serious as it does, you can avoid Configuritis by NOT configure every plugin in each and every project, but use something
+similiar to sebipom as parent pom in your project. Since a parent pom can have a parent, this does not limit you when you want or need to define a multi-module project with a parent pom defining the modules.
 
 You can use the configuration by defining sebipom as the parent by simply adding
 ```

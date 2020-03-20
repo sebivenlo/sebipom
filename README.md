@@ -16,6 +16,7 @@ You can use the configuration by defining sebipom as the parent by simply adding
         <groupId>nl.fontys.sebivenlo</groupId>
         <artifactId>sebipom</artifactId>
         <version>1.4.5</version>
+	<relativePath/>
   </parent>
 ```
 to your project's pom.

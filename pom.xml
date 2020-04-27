@@ -260,6 +260,9 @@
                     <release>${java.release}</release>
                     <source>${java.release}</source>
                     <target>${java.release}</target>
+                    <compilerArgument>-Xpkginfo:always</compilerArgument>
+               
+
                 </configuration>
             </plugin>
             <plugin>
@@ -590,7 +593,7 @@
             </reporting>
         </profile>
         <profile>
-             <!--enable special class path for jacoco agent-->
+            <!--enable special class path for jacoco agent-->
             <id>jacocomodule</id>
             <activation>
                 <file>

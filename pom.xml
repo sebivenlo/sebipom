@@ -291,7 +291,7 @@
                 <configuration>
                     <additionalParam>-Xdoclint:none</additionalParam>
                     <additionalParam>-html5</additionalParam>
-                    <additionalOptions>--allow-script-in-comments --enable-preview</additionalOptions>
+                    <additionalOptions>--allow-script-in-comments</additionalOptions>
                     <release>${java.release}</release>
                     <source>${java.release}</source>
                     <show>private</show>
@@ -431,7 +431,7 @@
                 <configuration>
                     <additionalParam>-Xdoclint:none</additionalParam>
                     <additionalParam>-html5</additionalParam>
-                    <additionalOptions>--allow-script-in-comments --enable-preview</additionalOptions>
+                    <additionalOptions>--allow-script-in-comments</additionalOptions>
                     <release>${java.release}</release>
                     <source>${java.release}</source>
                     <show>private</show>
@@ -975,32 +975,6 @@
                     </plugin>
                 </plugins>
             </reporting>
-        </profile>
-        <profile>
-            <id>preview</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <configuration>
-                            <release>${java.release}</release>
-                            <source>${java.release}</source>
-                            <target>${java.release}</target>
-                            <compilerArgs>
-                                <arg>@{argLine} --enable-preview</arg>
-                            </compilerArgs>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <argLine>@{argLine} --enable-preview</argLine>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
     </profiles>
 </project>

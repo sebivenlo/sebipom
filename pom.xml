@@ -338,6 +338,7 @@
                     <argLine>
                         @{argLine}
                     </argLine>
+                    <trimStackTrace>false</trimStackTrace>
                 </configuration>
             </plugin>
             <plugin>

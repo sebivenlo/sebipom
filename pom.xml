@@ -27,10 +27,10 @@
         </developer>
     </developers>
     <groupId>nl.fontys.sebivenlo</groupId>
-    <artifactId>sebipom</artifactId>
+    <artifactId>sebipommetje</artifactId>
     <version>2.3.9</version>
     <packaging>pom</packaging>
-    <name>SEBIVenlo :: SEBIPom</name>
+    <name>SEBIVenlo :: SEBIPommetje</name>
     <url>https://www.fontysvenlo.org/repository</url>
 
     <distributionManagement>
@@ -77,7 +77,7 @@
         </repository>
     </repositories>
     <build>
-        <defaultGoal>clean install</defaultGoal>
+        <defaultGoal>clean test</defaultGoal>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -123,6 +123,11 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-report-plugin</artifactId>
                     <version>${maven.surefire.version}</version>
                 </plugin>
                 <plugin>
@@ -380,7 +385,6 @@
     </dependencyManagement>
 
     <reporting>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -388,77 +392,19 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <additionalParam>-Xdoclint:none</additionalParam>
-                    <additionalParam>-html5</additionalParam>
-                    <additionalOptions>--allow-script-in-comments</additionalOptions>
-                    <release>${java.release}</release>
-                    <source>${java.release}</source>
-                    <show>private</show>
-                    <resourcesArtifacts>
-                        <resourceArtifact>
-                            <groupId>nl.fontys.sebivenlo</groupId>
-                            <artifactId>javadochighlighter</artifactId>
-                            <version>1.0</version>
-                        </resourceArtifact>
-                    </resourcesArtifacts>
-                    <!-- Add SyntaxHighlighter feature.
-                    This gets added to the top of every Javadoc html file -->
-                    <top><![CDATA[
-                            <script src="{@docRoot}/syntaxhighlighter/syntaxhighlighter.js" type="text/javascript"></script>
-                            <link href="{@docRoot}/syntaxhighlighter/theme.css" rel="stylesheet" type="text/css" title="Style">
-                            ]]>
-                    </top>
-                    <!-- Activate and customize SyntaxHighlighter feature
-                    This gets added to the bottom of every Javadoc html file -->
-                    <footer><![CDATA[
-                            <script type="text/javascript">
-                               SyntaxHighlighter.defaults["auto-links"] = false;
-                               SyntaxHighlighter.defaults["tab-size"] = 2;
-                               SyntaxHighlighter.all();
-                            </script>
-                        ]]></footer>
-                </configuration>
-
+                <artifactId>maven-surefire-report-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
-
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <configuration>
-                    <linkXref>true</linkXref>
-                    <sourceEncoding>utf-8</sourceEncoding>
-                    <minimumTokens>100</minimumTokens>
-                    <targetJdk>${java.release}</targetJdk>
-                    <excludes>
-                        <exclude>**/generated/*.java</exclude>
-                    </excludes>
-                    <excludeRoots>
-                        <excludeRoot>target/generated-sources/stubs</excludeRoot>
-                    </excludeRoots>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.0.0</version>
                 <reportSets>
                     <reportSet>
                         <reports>
-                            <report>checkstyle</report>
+                            <report>jxr</report>
+                            <report>test-jxr</report>
                         </reports>
                     </reportSet>
                 </reportSets>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <consoleOutput>true</consoleOutput>
-                    <linkXRef>true</linkXRef>
-                </configuration>
-
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -472,27 +418,7 @@
                     </reportSet>
                 </reportSets>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <configuration>
-                    <linkXref>true</linkXref>
-                    <sourceEncoding>utf-8</sourceEncoding>
-                    <minimumTokens>100</minimumTokens>
-                    <targetJdk>${java.release}</targetJdk>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <configuration></configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-maven-plugin</artifactId>
-            </plugin>
         </plugins>
-
     </reporting>
 
     <dependencies>
@@ -869,6 +795,116 @@
                         </reportSets>
                     </plugin>
                 </plugins>
+            </reporting>
+        </profile>
+        <profile>
+            <id>allreports</id>
+            <reporting>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <configuration>
+                            <additionalParam>-Xdoclint:none</additionalParam>
+                            <additionalParam>-html5</additionalParam>
+                            <additionalOptions>--allow-script-in-comments</additionalOptions>
+                            <release>${java.release}</release>
+                            <source>${java.release}</source>
+                            <show>private</show>
+                            <resourcesArtifacts>
+                                <resourceArtifact>
+                                    <groupId>nl.fontys.sebivenlo</groupId>
+                                    <artifactId>javadochighlighter</artifactId>
+                                    <version>1.0</version>
+                                </resourceArtifact>
+                            </resourcesArtifacts>
+                            <!-- Add SyntaxHighlighter feature.
+                            This gets added to the top of every Javadoc html file -->
+                            <top><![CDATA[
+                            <script src="{@docRoot}/syntaxhighlighter/syntaxhighlighter.js" type="text/javascript"></script>
+                            <link href="{@docRoot}/syntaxhighlighter/theme.css" rel="stylesheet" type="text/css" title="Style">
+                            ]]>
+                            </top>
+                            <!-- Activate and customize SyntaxHighlighter feature
+                            This gets added to the bottom of every Javadoc html file -->
+                            <footer><![CDATA[
+                            <script type="text/javascript">
+                               SyntaxHighlighter.defaults["auto-links"] = false;
+                               SyntaxHighlighter.defaults["tab-size"] = 2;
+                               SyntaxHighlighter.all();
+                            </script>
+                        ]]></footer>
+                        </configuration>
+
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pmd-plugin</artifactId>
+                        <configuration>
+                            <linkXref>true</linkXref>
+                            <sourceEncoding>utf-8</sourceEncoding>
+                            <minimumTokens>100</minimumTokens>
+                            <targetJdk>${java.release}</targetJdk>
+                            <excludes>
+                                <exclude>**/generated/*.java</exclude>
+                            </excludes>
+                            <excludeRoots>
+                                <excludeRoot>target/generated-sources/stubs</excludeRoot>
+                            </excludeRoots>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>checkstyle</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                        <configuration>
+                            <encoding>UTF-8</encoding>
+                            <consoleOutput>true</consoleOutput>
+                            <linkXRef>true</linkXRef>
+                        </configuration>
+
+                    </plugin>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <!-- select non-aggregate reports -->
+                                    <report>report</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pmd-plugin</artifactId>
+                        <configuration>
+                            <linkXref>true</linkXref>
+                            <sourceEncoding>utf-8</sourceEncoding>
+                            <minimumTokens>100</minimumTokens>
+                            <targetJdk>${java.release}</targetJdk>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jxr-plugin</artifactId>
+                        <configuration>
+                            
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+
             </reporting>
         </profile>
     </profiles>

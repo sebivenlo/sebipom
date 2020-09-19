@@ -30,7 +30,7 @@
     <artifactId>sebipom</artifactId>
     <version>2.4.0</version>
     <packaging>pom</packaging>
-    <name>SEBIVenlo :: SEBIPommetje</name>
+    <name>SEBIVenlo :: SEBIPom</name>
     <url>https://www.fontysvenlo.org/repository</url>
 
     <distributionManagement>

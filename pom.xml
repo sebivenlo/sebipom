@@ -467,6 +467,7 @@
     </dependencies>
     <profiles>
         <profile>
+            <id>Java 8</id>
             <activation>
                 <jdk>1.8</jdk>
             </activation>
@@ -475,7 +476,7 @@
 
                 </plugins>
             </reporting>
-        </profile>
+        </profile><!-- Java 8 -->
         <profile>
             <!--enable special class path for jacoco agent-->
             <id>jacocomodule</id>
@@ -489,7 +490,7 @@
                     -javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${project.build.directory}/jacoco.exec
                 </jacocoArgLine>
             </properties>
-        </profile>
+        </profile><!-- jacoco modular-->
         <profile>
             <id>jacoco</id>
             <properties>
@@ -564,10 +565,7 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
-        <profile>
-            <id>assembly</id>
-        </profile>
+        </profile><!-- jacoco -->
         <profile>
             <id>fx</id>
             <build>
@@ -617,7 +615,7 @@
                     </resource>
                 </resources>
             </build>
-        </profile>
+        </profile> <!-- fx -->
         <profile>
             <id>all-javadoc-linklocal</id>
             <build>
@@ -666,7 +664,7 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
+        </profile><!-- all-javadoc-linklocal -->
         <profile>
             <id>all-javadoc</id>
             <build>
@@ -811,7 +809,7 @@
                     </plugin>
                 </plugins>
             </reporting>
-        </profile>
+        </profile><!-- pit -->
         <profile>
             <id>allreports</id>
             <reporting>
@@ -921,6 +919,6 @@
                 </plugins>
 
             </reporting>
-        </profile>
+        </profile><!-- all-reports -->
     </profiles>
 </project>

@@ -8,9 +8,10 @@
         This is NOT cargo-cult, because NONE of the dependencies in this pom will end up in your final product.
 
         Version 2.3.6 added mockito jupiter plugin.
-        Version 2.3.8 bumps junit-jupyter from 5.6.0 to 5.6.2 and added jacoco command line for 
+        Version 2.3.8 bumps junit-jupyter from 5.6.0 to 5.6.2 and added jacoco command line for
         modular projects
         Version 2.4.0 leaner default build.
+        Version 3.0-SNAPSHOT move junit 4.12 to junit-legacy profile
     </description>
 
     <developers>
@@ -28,7 +29,7 @@
     </developers>
     <groupId>nl.fontys.sebivenlo</groupId>
     <artifactId>sebipom</artifactId>
-    <version>2.5.1</version>
+    <version>3.0.0</version>
     <packaging>pom</packaging>
     <name>SEBIVenlo :: SEBIPom</name>
     <url>https://www.fontysvenlo.org/repository</url>
@@ -48,7 +49,8 @@
         <java.lib.dir>/usr/share/java</java.lib.dir>
         <java.release>11</java.release>
         <mockito.core.version>3.5.13</mockito.core.version>
-        <junit.jupiter.version>5.7.0</junit.jupiter.version>        
+        <junit.jupiter.version>5.7.0</junit.jupiter.version>
+        <assertj.core.version>3.18.1</assertj.core.version>
         <jacoco.version>0.8.6</jacoco.version>
         <!-- empty argline is used by surefire and set by jacoco profile -->
         <jacocoArgLine></jacocoArgLine>
@@ -93,12 +95,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.1.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -113,7 +115,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -138,7 +140,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.8.2</version>
+                    <version>3.9.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -148,7 +150,7 @@
                 <plugin>
                     <groupId>org.pitest</groupId>
                     <artifactId>pitest-maven</artifactId>
-                    <version>1.5.0</version>
+                    <version>1.6.2</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.pitest</groupId>
@@ -160,7 +162,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.1.1</version>
                     <dependencies>
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
@@ -172,13 +174,13 @@
                 <plugin>
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
-                    <version>3.1.12.2</version>
+                    <version>4.2.0</version>
                     <dependencies>
                         <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
                         <dependency>
                             <groupId>com.github.spotbugs</groupId>
                             <artifactId>spotbugs</artifactId>
-                            <version>4.0.0-RC3</version>
+                            <version>4.2.0</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -190,27 +192,27 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-pmd-plugin</artifactId>
-                    <version>3.13.0</version>
+                    <version>3.14.0</version>
                     <dependencies>
                         <dependency>
                             <groupId>net.sourceforge.pmd</groupId>
                             <artifactId>pmd-core</artifactId>
-                            <version>6.21.0</version>
+                            <version>6.30.0</version>
                         </dependency>
                         <dependency>
                             <groupId>net.sourceforge.pmd</groupId>
                             <artifactId>pmd-java</artifactId>
-                            <version>6.21.0</version>
+                            <version>6.30.0</version>
                         </dependency>
                         <dependency>
                             <groupId>net.sourceforge.pmd</groupId>
                             <artifactId>pmd-javascript</artifactId>
-                            <version>6.21.0</version>
+                            <version>6.30.0</version>
                         </dependency>
                         <dependency>
                             <groupId>net.sourceforge.pmd</groupId>
                             <artifactId>pmd-jsp</artifactId>
-                            <version>6.21.0</version>
+                            <version>6.30.0</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -266,8 +268,6 @@
                     <source>${java.release}</source>
                     <target>${java.release}</target>
                     <compilerArgument>-Xpkginfo:always</compilerArgument>
-               
-
                 </configuration>
             </plugin>
             <plugin>
@@ -334,7 +334,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ssh-external</artifactId>
-                <version>3.3.3</version>
+                <version>3.4.2</version>
             </extension>
         </extensions>
 
@@ -342,14 +342,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
-            </dependency>
-            <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>3.17.2</version>
+                <version>${assertj.core.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
@@ -423,11 +418,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <scope>test</scope>
@@ -459,11 +449,6 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -477,6 +462,20 @@
                 </plugins>
             </reporting>
         </profile><!-- Java 8 -->
+        <profile>
+            <id>junit-legacy</id>
+            <dependencies>
+                <dependency>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                    <version>4.12</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
         <profile>
             <!--enable special class path for jacoco agent-->
             <id>jacocomodule</id>
@@ -909,7 +908,7 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-jxr-plugin</artifactId>
                         <configuration>
-                            
+
                         </configuration>
                     </plugin>
                     <plugin>

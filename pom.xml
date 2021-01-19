@@ -11,7 +11,7 @@
         Version 2.3.8 bumps junit-jupyter from 5.6.0 to 5.6.2 and added jacoco command line for
         modular projects
         Version 2.4.0 leaner default build.
-        Version 3.0-SNAPSHOT move junit 4.12 to junit-legacy profile
+        Version 3.0.0 move junit 4.12 to junit-legacy profile
     </description>
 
     <developers>

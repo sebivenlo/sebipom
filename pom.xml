@@ -270,7 +270,6 @@
                     <compilerArgs>
                         <arg>-Xpkginfo:always</arg>
                         <arg>-verbose</arg>
-                        <arg>-Xlint:all,-options,-path</arg>
                     </compilerArgs>
 
                 </configuration>

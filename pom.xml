@@ -12,6 +12,7 @@
         modular projects
         Version 2.4.0 leaner default build.
         Version 3.0.0 move junit 4.12 to junit-legacy profile
+        Version 3.0.2 removed unneeded and broken jacocomodular profile
     </description>
 
     <developers>
@@ -29,7 +30,7 @@
     </developers>
     <groupId>nl.fontys.sebivenlo</groupId>
     <artifactId>sebipom</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.2</version>
     <packaging>pom</packaging>
     <name>SEBIVenlo :: SEBIPom</name>
     <url>https://www.fontysvenlo.org/repository</url>
@@ -55,6 +56,8 @@
         <!-- empty argline is used by surefire and set by jacoco profile -->
         <jacocoArgLine></jacocoArgLine>
         <argLine></argLine>
+        <!-- for java 9 modules (jigsaw) use surefire.opens to open packages -->
+        <surefire.opens></surefire.opens>
         <!-- surefire 3.0.0-Mx uses incompatible message handling for
         //  asserttions.fail, uses CDATA instead of plain xml text, so for the time being stay at 2.22.2 -->
         <maven.surefire.version>2.22.2</maven.surefire.version>
@@ -267,10 +270,10 @@
                     <release>${java.release}</release>
                     <source>${java.release}</source>
                     <target>${java.release}</target>
-                    <compilerArgs>
+                    <!--                    <compilerArgs>
                         <arg>-Xpkginfo:always</arg>
                         <arg>-verbose</arg>
-                    </compilerArgs>
+                    </compilerArgs>-->
 
                 </configuration>
             </plugin>
@@ -303,6 +306,7 @@
                 <configuration>
                     <argLine>
                         @{argLine}
+                        ${surefire.opens}
                     </argLine>
                     <trimStackTrace>true</trimStackTrace>
                 </configuration>
@@ -485,20 +489,6 @@
                 </dependency>
             </dependencies>
         </profile>
-        <profile>
-            <!--enable special class path for jacoco agent-->
-            <id>jacocomodule</id>
-            <activation>
-                <file>
-                    <exists>${basedir}/src/main/java/module-info.java</exists>
-                </file>
-            </activation>
-            <properties>
-                <jacocoArgLine>
-                    -javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${project.build.directory}/jacoco.exec
-                </jacocoArgLine>
-            </properties>
-        </profile><!-- jacoco modular-->
         <profile>
             <id>jacoco</id>
             <properties>
@@ -947,5 +937,30 @@
                 </plugins>
             </build>
         </profile> <!--xlint-->
+        <profile>
+            <id>preview</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <compilerArgs>--enable-preview</compilerArgs>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>--enable-preview</argument>
+                                <argument>exec.mainClass</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 </project>

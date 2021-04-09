@@ -3,22 +3,23 @@
 Maven parent project file for use with sebi venlo projects. Split off from statewalker.
 
 *Mavenitis* is not avoidable, but *Configuritis* is.
-If you did not know: If you use maven, maven will be quite diligent ant ensure that all your
-dependencies are up to date. This may and will lead to the behaviour of downloading the whole maven universe to
-your machine, or at least the pieces (dependencies) that are in use by your project, directly or indirectly or transitivitely.
+If you did not know: If you use maven, maven will be quite diligent and ensure that all your
+dependencies are up to date. This may and will lead to the behavior of downloading the whole maven universe to
+your machine, or at least the pieces (dependencies) that are in use by your project, directly or indirectly or transitively.
 
-Once you get past the first symptoms of mavinitis, by simple accepting the dilligence that maven exhibts, because it takes
+Once you get past the first symptoms of mavinitis, by simple accepting the diligence that maven exhibits, because it takes
 it task as serious as it does, you can avoid Configuritis by NOT configure every plugin in each and every project, but use something
-similiar to sebipom as parent pom in your project. Since a parent pom can have a parent, this does not limit you when you want or need to define a multi-module project with a parent pom defining the modules.
+similiar to sebipom as parent pom in your project. Since a parent pom can have a parent,
+this does not limit you when you want or need to define a multi-module project with a parent pom defining the modules.
 
 You can use the configuration by defining sebipom as the parent by simply adding
 
 ```
   <parent>
-        <groupId>nl.fontys.sebivenlo</groupId>
-        <artifactId>sebipom</artifactId>
-        <version>2.3.7</version>
-	<relativePath/>
+      <groupId>nl.fontys.sebivenlo</groupId>
+      <artifactId>sebipom</artifactId>
+      <version>3.0.2</version>
+      <relativePath/>
   </parent>
 ```
 to your project's pom.
@@ -31,7 +32,8 @@ Feature:
 * Java Coverage with JaCoCo
 * PIT testing plugin
 * PMD and SpotBugs (2.x.x branch)
-* JavaFX integration when using profile fx (e.g. mvn -P fx package)
+* JavaFX integration when using profile fx (e.g. mvn -P fx package).
+* easy testing of modular JPMS  projects
 
 From now on sebipon will have a repo on its own.
 
@@ -40,12 +42,29 @@ From now on sebipon will have a repo on its own.
 **TL;DR:** Don't do `mvn package` or build (in your IDE) , do `mvn test` instead.
 
 For those that are into test driven something:
-Make it a habit to do `mvn test` instead of `mvn package`. `mvn package` typically does much more work than really required to get your tests do thier work. Enjoy the better maven experience this way.
+Make it a habit to do `mvn test` instead of `mvn package`. `mvn package` typically does much more work than really required to get your tests do thier work. Enjoy the better maven experience this way. With sebipom , just typing *mvn*  defaults to mevn test.
 
-## Run an FX application with this parent pom
+## Run an JavaFX application with this parent pom
 
 When you are building a JavaFX application, remember to use the **fx** profile defined in this pom.
 
 You do that by invoking e.g.  `mvn -P fx package`. If your application is called **app** with version **1.0**, then this will make a FAT jar named
 `app-1.0-jar-with-dependencies.jar`.
 
+## Run java 9 modular (JPMS) projects and test with little hassle.
+
+Sebipom provides a simple mechanism to **open** the packages of your modular project.
+Add the property `<surefire.opens>` to your properties inside the pom.xml file of your project.
+
+```
+  </properties>
+        <surefire.opens>
+            --add-opens surveyor/surveyor=ALL-UNNAMED
+            --add-opens javafx.graphics/com.sun.javafx.application.ParametersImpl=ALL-UNNAMED
+            --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+        </surefire.opens>
+   </properties>
+```
+
+With sebipom, the only configuration left to you is adding the actual dependencies of your project and maybe test libraries
+for JavaFX, such as testfx.

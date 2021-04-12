@@ -65,6 +65,7 @@
         <checkstyle.config.location>${user.home}/.m2/sebivenlo_checks.xml</checkstyle.config.location>
         <javadoc.location>/usr/share/doc/openjdk-11-doc/docs/api/</javadoc.location>
         <pmdVersion>6.21.0</pmdVersion>
+        <javafx-maven-plugin-version>0.0.5</javafx-maven-plugin-version>
     </properties>
 
     <pluginRepositories>
@@ -149,6 +150,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
                     <version>3.0.0-M1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-maven-plugin</artifactId>
+                    <version>${javafx-maven-plugin-version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.pitest</groupId>
@@ -571,9 +577,12 @@
                     <plugin>
                         <groupId>org.openjfx</groupId>
                         <artifactId>javafx-maven-plugin</artifactId>
-                        <version>0.0.5</version>
+
                         <configuration>
                             <mainClass>${exec.mainClass}</mainClass>
+                            <jlinkImageName>${project.artifactId}</jlinkImageName>
+                            <jlinkZipName>${project.artifactId}</jlinkZipName>
+                            <launcher>${project.artifactId}.sh</launcher>
                         </configuration>
                     </plugin>
 

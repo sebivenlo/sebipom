@@ -1,4 +1,4 @@
-# sebipom
+== sebipom
 
 Maven parent project file for use with sebi venlo projects. Split off from statewalker.
 
@@ -14,14 +14,17 @@ this does not limit you when you want or need to define a multi-module project w
 
 You can use the configuration by defining sebipom as the parent by simply adding
 
-```
+.Adding sebipom as parent to a project: add this near the top.
+[source,xml]
+----
   <parent>
       <groupId>nl.fontys.sebivenlo</groupId>
       <artifactId>sebipom</artifactId>
       <version>3.0.2</version>
       <relativePath/>
   </parent>
-```
+----
+
 to your project's pom.
 
 
@@ -38,47 +41,51 @@ Feature:
 From now on sebipon will have a repo on its own.
 
 In the table below you find all the properties sebipom defines.
-All properties have to  be written in the maven format: <property-name>value</property-name>,
-where 'property-name' is the name, and the value is the value.
+All properties have to  be written in the maven format: `<property-name>value</property-name>`,
+where `property-name` is the name, and the `value` is the value.
 
-|Property | default value | meaning |
-|-------- | ---------|---------------|
-|project.build.sourceEncoding |UTF8| source encoding of java files|
-|java.lib.dir| /usr/share/java| where the general java libs for extendsions are stored|
-|java.release | 11| java version |
-|mockito.core.version|3.5.13| |
-|junit.jupiter.version|5.7.0||
-|assertj.core.version|3.18.1||
-|jacoco.version|0.8.6 | |
-|jacocoArgLine| |defined to be able to configure jacoco|
-|argLine|| to be able to pass extra arguments|
-|surefire.opens|| to be able to pass opens statement to the jvm during test runs|
-|maven.surefire.version|2.22.2|surefire version|
-|checkstyle.config.location| checkstyle config|${user.home}/.m2/sebivenlo_checks.xml||
-|javadoc.location| /usr/share/doc/openjdk-11-doc/docs/api/|to link javadoc locally |
-|pmdVersion|6.21.0| |
+[options="header"]
+|====
+|Property | default value | meaning
+|project.build.sourceEncoding |UTF8| source encoding of java files
+|java.lib.dir| /usr/share/java| where the general java libs for extendsions are stored
+|java.release | 11| java version
+|mockito.core.version|3.5.13|
+|junit.jupiter.version|5.7.0|
+|assertj.core.version|3.18.1|
+|jacoco.version|0.8.6 |
+|jacocoArgLine| |defined to be able to configure jacoco
+|argLine|| to be able to pass extra arguments
+|surefire.opens|| to be able to pass opens statement to the jvm during test runs
+|maven.surefire.version|2.22.2|surefire version
+|checkstyle.config.location| ${user.home}/.m2/sebivenlo_checks.xml | checkstyle config
+|javadoc.location| /usr/share/doc/openjdk-11-doc/docs/api/|to link javadoc locally
+|pmdVersion|6.21.0|
 |javafx-maven-plugin-version|0.0.5|
+|====
 
-## For TDD fans.
+=== For TDD fans.
 
 **TL;DR:** Don't do `mvn package` or build (in your IDE) , do `mvn test` instead.
 
 For those that are into test driven something:
 Make it a habit to do `mvn test` instead of `mvn package`. `mvn package` typically does much more work than really required to get your tests do thier work. Enjoy the better maven experience this way. With sebipom , just typing *mvn*  defaults to mevn test.
 
-## Run an JavaFX application with this parent pom
+=== Run an JavaFX application with this parent pom
 
 When you are building a JavaFX application, remember to use the **fx** profile defined in this pom.
 
 You do that by invoking e.g.  `mvn -P fx package`. If your application is called **app** with version **1.0**, then this will make a FAT jar named
 `app-1.0-jar-with-dependencies.jar`.
 
-## Run java 9 modular (JPMS) projects and test with little hassle.
+=== Run java 9 modular (JPMS) projects and test with little hassle.
 
 Sebipom provides a simple mechanism to **open** the packages of your modular project.
 Add the property `<surefire.opens>` to your properties inside the pom.xml file of your project.
 
-```
+.setting the opens statements, so that junit and the fx test framework can reflect on 'business' and test classes
+[source,xml]
+----
   <properties>
         <surefire.opens>
             --add-opens surveyor/surveyor=ALL-UNNAMED
@@ -86,7 +93,7 @@ Add the property `<surefire.opens>` to your properties inside the pom.xml file o
             --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
         </surefire.opens>
    </properties>
-```
+----
 
 With sebipom, the only configuration left to you is adding the actual dependencies of your project and maybe test libraries
 for JavaFX, such as testfx.

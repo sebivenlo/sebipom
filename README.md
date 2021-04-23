@@ -50,7 +50,6 @@ where 'property-name' is the name, and the value is the value.
 |junit.jupiter.version|5.7.0||
 |assertj.core.version|3.18.1||
 |jacoco.version|0.8.6 | |
-
 |jacocoArgLine| |defined to be able to configure jacoco|
 |argLine|| to be able to pass extra arguments|
 |surefire.opens|| to be able to pass opens statement to the jvm during test runs|

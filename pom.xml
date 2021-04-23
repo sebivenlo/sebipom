@@ -59,7 +59,7 @@
         <!-- for java 9 modules (jigsaw) use surefire.opens to open packages -->
         <surefire.opens></surefire.opens>
         <!-- surefire 3.0.0-Mx uses incompatible message handling for
-        //  asserttions.fail, uses CDATA instead of plain xml text, so for the time being stay at 2.22.2 -->
+        //  assertions.fail, uses CDATA instead of plain xml text, so for the time being stay at 2.22.2 -->
         <maven.surefire.version>2.22.2</maven.surefire.version>
         <maven.compiler.release>${java.release}</maven.compiler.release>
         <checkstyle.config.location>${user.home}/.m2/sebivenlo_checks.xml</checkstyle.config.location>

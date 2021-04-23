@@ -37,6 +37,29 @@ Feature:
 
 From now on sebipon will have a repo on its own.
 
+In the table below you find all the properties sebipom defines.
+All properties have to  be written in the maven format: <property-name>value</property-name>,
+where 'property-name' is the name, and the value is the value.
+
+|Property | default value | meaning |
+|-------- | ---------|---------------|
+|project.build.sourceEncoding |UTF8| source encoding of java files|
+|java.lib.dir| /usr/share/java| where the general java libs for extendsions are stored|
+|java.release | 11| java version |
+|mockito.core.version|3.5.13| |
+|junit.jupiter.version|5.7.0||
+|assertj.core.version|3.18.1||
+|jacoco.version|0.8.6 | |
+
+|jacocoArgLine| |defined to be able to configure jacoco|
+|argLine|| to be able to pass extra arguments|
+|surefire.opens|| to be able to pass opens statement to the jvm during test runs|
+|maven.surefire.version|2.22.2|surefire version|
+|checkstyle.config.location| checkstyle config|${user.home}/.m2/sebivenlo_checks.xml||
+|javadoc.location| /usr/share/doc/openjdk-11-doc/docs/api/|to link javadoc locally |
+|pmdVersion|6.21.0| |
+|javafx-maven-plugin-version|0.0.5|
+
 ## For TDD fans.
 
 **TL;DR:** Don't do `mvn package` or build (in your IDE) , do `mvn test` instead.
@@ -57,7 +80,7 @@ Sebipom provides a simple mechanism to **open** the packages of your modular pro
 Add the property `<surefire.opens>` to your properties inside the pom.xml file of your project.
 
 ```
-  </properties>
+  <properties>
         <surefire.opens>
             --add-opens surveyor/surveyor=ALL-UNNAMED
             --add-opens javafx.graphics/com.sun.javafx.application.ParametersImpl=ALL-UNNAMED

@@ -30,7 +30,7 @@
     </developers>
     <groupId>nl.fontys.sebivenlo</groupId>
     <artifactId>sebipom</artifactId>
-    <version>3.0.2</version>
+    <version>3.0.3</version>
     <packaging>pom</packaging>
     <name>SEBIVenlo :: SEBIPom</name>
     <url>https://www.fontysvenlo.org/repository</url>
@@ -66,6 +66,7 @@
         <javadoc.location>/usr/share/doc/openjdk-11-doc/docs/api/</javadoc.location>
         <pmdVersion>6.21.0</pmdVersion>
         <javafx-maven-plugin-version>0.0.5</javafx-maven-plugin-version>
+        <javadoc-highlight>true</javadoc-highlight>
     </properties>
 
     <pluginRepositories>
@@ -667,6 +668,13 @@
                                     <version>1.1.1</version>
                                 </additionalDependency>
                             </additionalDependencies>
+                            <additionalParam>-Xdoclint:none</additionalParam>
+                            <additionalParam>-html5</additionalParam>
+                            <additionalOptions>--allow-script-in-comments</additionalOptions>
+                            <release>${java.release}</release>
+                            <source>${java.release}</source>
+                            <show>private</show>
+
                         </configuration>
                     </plugin>
                 </plugins>
@@ -690,8 +698,7 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <detectJavaApiLink>false</detectJavaApiLink>
-                            <show>private</show>
+
                             <offlineLinks>
                                 <offlineLink>
                                     <url>file://${javadoc.location}</url>
@@ -824,37 +831,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <configuration>
-                            <additionalParam>-Xdoclint:none</additionalParam>
-                            <additionalParam>-html5</additionalParam>
-                            <additionalOptions>--allow-script-in-comments</additionalOptions>
-                            <release>${java.release}</release>
-                            <source>${java.release}</source>
-                            <show>private</show>
-                            <resourcesArtifacts>
-                                <resourceArtifact>
-                                    <groupId>nl.fontys.sebivenlo</groupId>
-                                    <artifactId>javadochighlighter</artifactId>
-                                    <version>1.0</version>
-                                </resourceArtifact>
-                            </resourcesArtifacts>
-                            <!-- Add SyntaxHighlighter feature.
-                            This gets added to the top of every Javadoc html file -->
-                            <top><![CDATA[
-                            <script src="{@docRoot}/syntaxhighlighter/syntaxhighlighter.js" type="text/javascript"></script>
-                            <link href="{@docRoot}/syntaxhighlighter/theme.css" rel="stylesheet" type="text/css" title="Style">
-                            ]]>
-                            </top>
-                            <!-- Activate and customize SyntaxHighlighter feature
-                            This gets added to the bottom of every Javadoc html file -->
-                            <footer><![CDATA[
-                            <script type="text/javascript">
-                               SyntaxHighlighter.defaults["auto-links"] = false;
-                               SyntaxHighlighter.defaults["tab-size"] = 2;
-                               SyntaxHighlighter.all();
-                            </script>
-                        ]]></footer>
-                        </configuration>
 
                     </plugin>
                     <plugin>
@@ -966,6 +942,56 @@
                                 <argument>--enable-preview</argument>
                                 <argument>exec.mainClass</argument>
                             </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>javadoc-highlight</id>
+            <activation>
+                <property>
+                    <name>javadoc-highlight</name>
+                    <value>true</value>
+                </property>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <configuration>
+                            <additionalParam>-Xdoclint:none</additionalParam>
+                            <additionalParam>-html5</additionalParam>
+                            <additionalOptions>--allow-script-in-comments</additionalOptions>
+                            <release>${java.release}</release>
+                            <source>${java.release}</source>
+                            <detectJavaApiLink>false</detectJavaApiLink>
+                            <!--<show>private</show>-->
+                            <resourcesArtifacts>
+                                <resourceArtifact>
+                                    <groupId>nl.fontys.sebivenlo</groupId>
+                                    <artifactId>javadochighlighter</artifactId>
+                                    <version>1.0</version>
+                                </resourceArtifact>
+                            </resourcesArtifacts>
+                            <!-- Add SyntaxHighlighter feature.
+                            This gets added to the top of every Javadoc html file -->
+                            <header><![CDATA[
+                            <script src="{@docRoot}/syntaxhighlighter/syntaxhighlighter.js" type="text/javascript"></script>
+                            <link href="{@docRoot}/syntaxhighlighter/theme.css" rel="stylesheet" type="text/css" title="Style">
+                            ]]>
+                            </header>
+                            <!-- Activate and customize SyntaxHighlighter feature
+                            This gets added to the bottom of every Javadoc html file -->
+                            <footer><![CDATA[
+                            <script type="text/javascript">
+                               SyntaxHighlighter.defaults["auto-links"] = false;
+                               SyntaxHighlighter.defaults["tab-size"] = 2;
+                               SyntaxHighlighter.all();
+                            </script>
+                       ]]></footer>
                         </configuration>
                     </plugin>
                 </plugins>

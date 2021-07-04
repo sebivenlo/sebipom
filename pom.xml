@@ -13,6 +13,7 @@
         Version 2.4.0 leaner default build.
         Version 3.0.0 move junit 4.12 to junit-legacy profile
         Version 3.0.2 removed unneeded and broken jacocomodular profile
+	Version 4.0.0 Java 17 features
     </description>
 
     <developers>
@@ -30,7 +31,7 @@
     </developers>
     <groupId>nl.fontys.sebivenlo</groupId>
     <artifactId>sebipom</artifactId>
-    <version>3.0.4</version>
+    <version>4.0.0</version>
     <packaging>pom</packaging>
     <name>SEBIVenlo :: SEBIPom</name>
     <url>https://www.fontysvenlo.org/repository</url>
@@ -48,11 +49,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.lib.dir>/usr/share/java</java.lib.dir>
-        <java.release>11</java.release>
+        <java.release>16</java.release>
         <mockito.core.version>3.5.13</mockito.core.version>
-        <junit.jupiter.version>5.7.0</junit.jupiter.version>
-        <assertj.core.version>3.18.1</assertj.core.version>
-        <jacoco.version>0.8.6</jacoco.version>
+        <junit.jupiter.version>5.7.2</junit.jupiter.version>
+        <assertj.core.version>3.19.0</assertj.core.version>
+        <jacoco.version>0.8.7</jacoco.version>
         <!-- empty argline is used by surefire and set by jacoco profile -->
         <jacocoArgLine></jacocoArgLine>
         <argLine></argLine>
@@ -60,11 +61,11 @@
         <surefire.opens></surefire.opens>
         <!-- surefire 3.0.0-Mx uses incompatible message handling for
         //  assertions.fail, uses CDATA instead of plain xml text, so for the time being stay at 2.22.2 -->
-        <maven.surefire.version>2.22.2</maven.surefire.version>
+        <maven.surefire.version>3.0.0-M5</maven.surefire.version>
         <maven.compiler.release>${java.release}</maven.compiler.release>
         <checkstyle.config.location>${user.home}/.m2/sebivenlo_checks.xml</checkstyle.config.location>
         <javadoc.location>/usr/share/doc/openjdk-11-doc/docs/api/</javadoc.location>
-        <pmdVersion>6.21.0</pmdVersion>
+        <pmdVersion>6.35.0</pmdVersion>
         <javafx-maven-plugin-version>0.0.5</javafx-maven-plugin-version>
         <javadoc-highlight>true</javadoc-highlight>
     </properties>
@@ -125,7 +126,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -207,22 +208,22 @@
                         <dependency>
                             <groupId>net.sourceforge.pmd</groupId>
                             <artifactId>pmd-core</artifactId>
-                            <version>6.34.0</version>
+                            <version>${pmdVersion}</version>
                         </dependency>
                         <dependency>
                             <groupId>net.sourceforge.pmd</groupId>
                             <artifactId>pmd-java</artifactId>
-                            <version>6.34.0</version>
+                            <version>${pmdVersion}</version>
                         </dependency>
                         <dependency>
                             <groupId>net.sourceforge.pmd</groupId>
                             <artifactId>pmd-javascript</artifactId>
-                            <version>6.34.0</version>
+                            <version>${pmdVersion}</version>
                         </dependency>
                         <dependency>
                             <groupId>net.sourceforge.pmd</groupId>
                             <artifactId>pmd-jsp</artifactId>
-                            <version>6.34.0</version>
+                            <version>${pmdVersion}</version>
                         </dependency>
                     </dependencies>
                 </plugin>

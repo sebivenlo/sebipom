@@ -80,7 +80,7 @@ You do that by invoking e.g.  `mvn -P fx package`. If your application is called
 
 === Run java 9 modular (JPMS) projects and test with little hassle.
 
-Sebipom provides a simple mechanism to **open** the packages of your modular project.
+Sebipom provides a simple mechanism to **open** or **exports** the packages of your modular project.
 Add the property `<surefire.opens>` to your properties inside the pom.xml file of your project.
 
 .setting the opens statements for javafx project, so that junit and the fx test framework can reflect on 'business' and test classes
@@ -94,6 +94,8 @@ Add the property `<surefire.opens>` to your properties inside the pom.xml file o
         </surefire.opens>
    </properties>
 ----
+
+In the example you see opening and exporting parts of javafx for the purpose of the tests. In normal use, the modules will still stay closed, as designed.
 
 With sebipom, the only configuration left to you is adding the actual dependencies of your project and maybe test libraries
 for JavaFX, such as testfx.

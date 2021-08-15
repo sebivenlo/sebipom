@@ -20,7 +20,7 @@ You can use the configuration by defining sebipom as the parent by simply adding
   <parent>
       <groupId>nl.fontys.sebivenlo</groupId>
       <artifactId>sebipom</artifactId>
-      <version>3.0.2</version>
+      <version>3.0.4</version>
       <relativePath/>
   </parent>
 ----
@@ -51,17 +51,17 @@ where `property-name` is the name, and the `value` is the value.
 |java.lib.dir| /usr/share/java| where the general java libs for extendsions are stored
 |java.release | 11| java version
 |mockito.core.version|3.5.13|
-|junit.jupiter.version|5.7.0|
-|assertj.core.version|3.18.1|
-|jacoco.version|0.8.6 |
+|junit.jupiter.version|5.7.2|
+|assertj.core.version|3.19.0|
+|jacoco.version|0.8.7|
 |jacocoArgLine| |defined to be able to configure jacoco
 |argLine|| to be able to pass extra arguments
 |surefire.opens|| to be able to pass opens statement to the jvm during test runs
 |maven.surefire.version|2.22.2|surefire version
 |checkstyle.config.location| ${user.home}/.m2/sebivenlo_checks.xml | checkstyle config
 |javadoc.location| /usr/share/doc/openjdk-11-doc/docs/api/|to link javadoc locally
-|pmdVersion|6.21.0|
-|javafx-maven-plugin-version|0.0.5|
+|pmdVersion|6.35.0|
+|javafx-maven-plugin-version|0.0.6|
 |====
 
 === For TDD fans.
@@ -83,7 +83,7 @@ You do that by invoking e.g.  `mvn -P fx package`. If your application is called
 Sebipom provides a simple mechanism to **open** the packages of your modular project.
 Add the property `<surefire.opens>` to your properties inside the pom.xml file of your project.
 
-.setting the opens statements, so that junit and the fx test framework can reflect on 'business' and test classes
+.setting the opens statements for javafx project, so that junit and the fx test framework can reflect on 'business' and test classes
 [source,xml]
 ----
   <properties>

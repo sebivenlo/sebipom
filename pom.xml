@@ -12,8 +12,8 @@
         modular projects
         Version 2.4.0 leaner default build.
         Version 3.0.0 move junit 4.12 to junit-legacy profile
-        Version 3.0.2 removed unneeded and broken jacocomodular profile
-	Version 4.0.0 Java 17 features
+        Version 3.0.2 removed unneeded and broken jacoco modular profile
+	      Version 4.0.0 Java 17 features
     </description>
 
     <developers>
@@ -66,7 +66,7 @@
         <checkstyle.config.location>${user.home}/.m2/sebivenlo_checks.xml</checkstyle.config.location>
         <javadoc.location>/usr/share/doc/openjdk-11-doc/docs/api/</javadoc.location>
         <pmdVersion>6.35.0</pmdVersion>
-        <javafx-maven-plugin-version>0.0.5</javafx-maven-plugin-version>
+        <javafx-maven-plugin-version>0.0.6</javafx-maven-plugin-version>
         <javadoc-highlight>true</javadoc-highlight>
     </properties>
 
@@ -161,7 +161,7 @@
                 <plugin>
                     <groupId>org.pitest</groupId>
                     <artifactId>pitest-maven</artifactId>
-                    <version>1.6.6</version>
+                    <version>1.6.7</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.pitest</groupId>
@@ -191,7 +191,7 @@
                         <dependency>
                             <groupId>com.github.spotbugs</groupId>
                             <artifactId>spotbugs</artifactId>
-                            <version>4.2.0</version>
+                            <version>4.2.3</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -350,7 +350,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ssh-external</artifactId>
-                <version>3.4.2</version>
+                <version>3.4.3</version>
             </extension>
         </extensions>
 
@@ -395,7 +395,7 @@
             <dependency>
                 <groupId>org.apiguardian</groupId>
                 <artifactId>apiguardian-api</artifactId>
-                <version>1.1.0</version>
+                <version>1.1.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -412,7 +412,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.1</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -906,7 +906,7 @@
 
             </reporting>
         </profile><!-- all-reports -->
-        
+
         <profile>
             <!-- activate compiler x-linting-->
             <id>xlint</id>
